@@ -11,7 +11,7 @@
 #include <linux/spi/spidev.h>
 
 static const char *SPI_DEVICE = "/dev/spidev0.0";
-static const uint32_t SPI_SPEED = 1000000;   // 1 MHz
+static const uint32_t SPI_SPEED = 50000;   // 50 kHz
 static const uint8_t SPI_BITS = 8;
 static const uint8_t SPI_MODE = SPI_MODE_0;
 
@@ -170,3 +170,4 @@ int main() {
     while (1)
         usleep(100000);
 }
+
