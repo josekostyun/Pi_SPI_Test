@@ -165,9 +165,8 @@ int main() {
     std::cout << "[SYSTEM] Running. Press CTRL+C to exit.\n";
 
     // Example send (optional test)
-    send_pothole_data(0027025000ULL, 12.3f, 1.7f);
+    send_pothole_data(28610250ULL, 12.3f, 1.7f);
 
     while (1)
         usleep(100000);
 }
-
