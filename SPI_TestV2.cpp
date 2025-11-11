@@ -54,7 +54,7 @@ bool send_pothole_data(uint64_t timestamp_ms, float area_sqin, float depth_in) {
         return false;
     }
 
-    uint32_t timestamp_field = timestamp_ms % 10000000000ULL;
+    uint64_t timestamp_field = timestamp_ms % 10000000000ULL; //change uint32_t to unint64_t
     uint32_t area_field = static_cast<uint32_t>(std::round(area_sqin * 10.0f));
     uint8_t depth_field = static_cast<uint8_t>(std::round(depth_in * 10.0f));
 
@@ -62,8 +62,8 @@ bool send_pothole_data(uint64_t timestamp_ms, float area_sqin, float depth_in) {
     if (depth_field > 255) depth_field = 255;
 
     char message[26] = {0};
-    snprintf(message, sizeof(message), "$PH,%010u,%05u,%03u#",
-             timestamp_field, area_field, depth_field);
+    snprintf(message, sizeof(message), "$PH,%010llu,%05u,%03u#",
+             timestamp_field, area_field, depth_field); //change %010u to 010llu
 
     struct spi_ioc_transfer transfer {};
     transfer.tx_buf = (unsigned long)message;
@@ -165,7 +165,7 @@ int main() {
     std::cout << "[SYSTEM] Running. Press CTRL+C to exit.\n";
 
     // Example send (optional test)
-    send_pothole_data(1234567890ULL, 12.3f, 1.7f);
+    send_pothole_data(0027025000ULL, 12.3f, 1.7f);
 
     while (1)
         usleep(100000);
